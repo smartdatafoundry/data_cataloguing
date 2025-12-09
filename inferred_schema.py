@@ -2,9 +2,16 @@ from pandera import DataFrameSchema, Column, Check, Index, MultiIndex
 
 schema = DataFrameSchema(
     columns={
-        "id": Column(
-            dtype="object",
-            checks=None,
+        "cid": Column(
+            dtype="int64",
+            checks=[
+                Check.greater_than_or_equal_to(
+                    min_value=100091083.0, raise_warning=False, ignore_na=True
+                ),
+                Check.less_than_or_equal_to(
+                    max_value=9999867562.0, raise_warning=False, ignore_na=True
+                ),
+            ],
             nullable=False,
             unique=False,
             coerce=False,
@@ -13,7 +20,7 @@ schema = DataFrameSchema(
             description=None,
             title=None,
         ),
-        "city": Column(
+        "postal_district": Column(
             dtype="object",
             checks=None,
             nullable=False,
@@ -35,7 +42,18 @@ schema = DataFrameSchema(
             description=None,
             title=None,
         ),
-        "date": Column(
+        "end_of_previous_period": Column(
+            dtype="datetime64[ns]",
+            checks=None,
+            nullable=False,
+            unique=False,
+            coerce=False,
+            required=True,
+            regex=False,
+            description=None,
+            title=None,
+        ),
+        "age_band": Column(
             dtype="object",
             checks=None,
             nullable=False,
@@ -46,32 +64,16 @@ schema = DataFrameSchema(
             description=None,
             title=None,
         ),
-        "salary": Column(
-            dtype="int64",
-            checks=[
-                Check.greater_than_or_equal_to(
-                    min_value=2162.0, raise_warning=False, ignore_na=True
-                ),
-                Check.less_than_or_equal_to(
-                    max_value=7886.0, raise_warning=False, ignore_na=True
-                ),
-            ],
-            nullable=False,
-            unique=False,
-            coerce=False,
-            required=True,
-            regex=False,
-            description=None,
-            title=None,
-        ),
-        "bonus": Column(
-            dtype="int64",
+        "income_salary": Column(
+            dtype="float64",
             checks=[
                 Check.greater_than_or_equal_to(
                     min_value=0.0, raise_warning=False, ignore_na=True
                 ),
                 Check.less_than_or_equal_to(
-                    max_value=1897.0, raise_warning=False, ignore_na=True
+                    max_value=29778.086217724547,
+                    raise_warning=False,
+                    ignore_na=True,
                 ),
             ],
             nullable=False,
@@ -82,14 +84,18 @@ schema = DataFrameSchema(
             description=None,
             title=None,
         ),
-        "investment": Column(
-            dtype="int64",
+        "income_benefits_universal_credit": Column(
+            dtype="float64",
             checks=[
                 Check.greater_than_or_equal_to(
-                    min_value=5.0, raise_warning=False, ignore_na=True
+                    min_value=0.1276160221917576,
+                    raise_warning=False,
+                    ignore_na=True,
                 ),
                 Check.less_than_or_equal_to(
-                    max_value=1491.0, raise_warning=False, ignore_na=True
+                    max_value=945.6739137351236,
+                    raise_warning=False,
+                    ignore_na=True,
                 ),
             ],
             nullable=False,
@@ -100,14 +106,18 @@ schema = DataFrameSchema(
             description=None,
             title=None,
         ),
-        "rent": Column(
-            dtype="int64",
+        "income_benefits_housing_credit": Column(
+            dtype="float64",
             checks=[
                 Check.greater_than_or_equal_to(
-                    min_value=502.0, raise_warning=False, ignore_na=True
+                    min_value=0.1744842852827815,
+                    raise_warning=False,
+                    ignore_na=True,
                 ),
                 Check.less_than_or_equal_to(
-                    max_value=2984.0, raise_warning=False, ignore_na=True
+                    max_value=698.4753879137477,
+                    raise_warning=False,
+                    ignore_na=True,
                 ),
             ],
             nullable=False,
@@ -118,14 +128,18 @@ schema = DataFrameSchema(
             description=None,
             title=None,
         ),
-        "groceries": Column(
-            dtype="int64",
+        "income_benefits_tax_credit": Column(
+            dtype="float64",
             checks=[
                 Check.greater_than_or_equal_to(
-                    min_value=102.0, raise_warning=False, ignore_na=True
+                    min_value=0.1880901325270856,
+                    raise_warning=False,
+                    ignore_na=True,
                 ),
                 Check.less_than_or_equal_to(
-                    max_value=787.0, raise_warning=False, ignore_na=True
+                    max_value=651.010428002568,
+                    raise_warning=False,
+                    ignore_na=True,
                 ),
             ],
             nullable=False,
@@ -136,14 +150,18 @@ schema = DataFrameSchema(
             description=None,
             title=None,
         ),
-        "utilities": Column(
-            dtype="int64",
+        "income_benefits_pension_credit": Column(
+            dtype="float64",
             checks=[
                 Check.greater_than_or_equal_to(
-                    min_value=65.0, raise_warning=False, ignore_na=True
+                    min_value=0.2369804287324577,
+                    raise_warning=False,
+                    ignore_na=True,
                 ),
                 Check.less_than_or_equal_to(
-                    max_value=394.0, raise_warning=False, ignore_na=True
+                    max_value=756.2973755173085,
+                    raise_warning=False,
+                    ignore_na=True,
                 ),
             ],
             nullable=False,
@@ -154,16 +172,437 @@ schema = DataFrameSchema(
             description=None,
             title=None,
         ),
-        "entertainment": Column(
-            dtype="int64",
+        "income_benefits_other": Column(
+            dtype="float64",
             checks=[
                 Check.greater_than_or_equal_to(
-                    min_value=57.0, raise_warning=False, ignore_na=True
+                    min_value=0.141883799053256,
+                    raise_warning=False,
+                    ignore_na=True,
                 ),
                 Check.less_than_or_equal_to(
-                    max_value=472.0, raise_warning=False, ignore_na=True
+                    max_value=1272.2713008200274,
+                    raise_warning=False,
+                    ignore_na=True,
                 ),
             ],
+            nullable=False,
+            unique=False,
+            coerce=False,
+            required=True,
+            regex=False,
+            description=None,
+            title=None,
+        ),
+        "income_pension_lump_sum": Column(
+            dtype="float64",
+            checks=[
+                Check.greater_than_or_equal_to(
+                    min_value=56.46236042651527,
+                    raise_warning=False,
+                    ignore_na=True,
+                ),
+                Check.less_than_or_equal_to(
+                    max_value=383835.8076134437,
+                    raise_warning=False,
+                    ignore_na=True,
+                ),
+            ],
+            nullable=False,
+            unique=False,
+            coerce=False,
+            required=True,
+            regex=False,
+            description=None,
+            title=None,
+        ),
+        "income_pension_regular_payment": Column(
+            dtype="float64",
+            checks=[
+                Check.greater_than_or_equal_to(
+                    min_value=1.448211522771465,
+                    raise_warning=False,
+                    ignore_na=True,
+                ),
+                Check.less_than_or_equal_to(
+                    max_value=7690.309168781179,
+                    raise_warning=False,
+                    ignore_na=True,
+                ),
+            ],
+            nullable=False,
+            unique=False,
+            coerce=False,
+            required=True,
+            regex=False,
+            description=None,
+            title=None,
+        ),
+        "income_investment": Column(
+            dtype="float64",
+            checks=[
+                Check.greater_than_or_equal_to(
+                    min_value=0.0, raise_warning=False, ignore_na=True
+                ),
+                Check.less_than_or_equal_to(
+                    max_value=0.0, raise_warning=False, ignore_na=True
+                ),
+            ],
+            nullable=False,
+            unique=False,
+            coerce=False,
+            required=True,
+            regex=False,
+            description=None,
+            title=None,
+        ),
+        "income_interest": Column(
+            dtype="float64",
+            checks=[
+                Check.greater_than_or_equal_to(
+                    min_value=0.0, raise_warning=False, ignore_na=True
+                ),
+                Check.less_than_or_equal_to(
+                    max_value=0.0, raise_warning=False, ignore_na=True
+                ),
+            ],
+            nullable=False,
+            unique=False,
+            coerce=False,
+            required=True,
+            regex=False,
+            description=None,
+            title=None,
+        ),
+        "income_other": Column(
+            dtype="float64",
+            checks=[
+                Check.greater_than_or_equal_to(
+                    min_value=0.8372995929357651,
+                    raise_warning=False,
+                    ignore_na=True,
+                ),
+                Check.less_than_or_equal_to(
+                    max_value=5621.326714739372,
+                    raise_warning=False,
+                    ignore_na=True,
+                ),
+            ],
+            nullable=False,
+            unique=False,
+            coerce=False,
+            required=True,
+            regex=False,
+            description=None,
+            title=None,
+        ),
+        "income": Column(
+            dtype="float64",
+            checks=[
+                Check.greater_than_or_equal_to(
+                    min_value=222.97933359213377,
+                    raise_warning=False,
+                    ignore_na=True,
+                ),
+                Check.less_than_or_equal_to(
+                    max_value=384516.033436225,
+                    raise_warning=False,
+                    ignore_na=True,
+                ),
+            ],
+            nullable=False,
+            unique=False,
+            coerce=False,
+            required=True,
+            regex=False,
+            description=None,
+            title=None,
+        ),
+        "expenditure_committed_mortgage": Column(
+            dtype="float64",
+            checks=[
+                Check.greater_than_or_equal_to(
+                    min_value=0.0, raise_warning=False, ignore_na=True
+                ),
+                Check.less_than_or_equal_to(
+                    max_value=54742.52042500519,
+                    raise_warning=False,
+                    ignore_na=True,
+                ),
+            ],
+            nullable=False,
+            unique=False,
+            coerce=False,
+            required=True,
+            regex=False,
+            description=None,
+            title=None,
+        ),
+        "expenditure_committed_rent": Column(
+            dtype="float64",
+            checks=[
+                Check.greater_than_or_equal_to(
+                    min_value=0.0, raise_warning=False, ignore_na=True
+                ),
+                Check.less_than_or_equal_to(
+                    max_value=101091.75726458256,
+                    raise_warning=False,
+                    ignore_na=True,
+                ),
+            ],
+            nullable=False,
+            unique=False,
+            coerce=False,
+            required=True,
+            regex=False,
+            description=None,
+            title=None,
+        ),
+        "expenditure_committed_other": Column(
+            dtype="float64",
+            checks=[
+                Check.greater_than_or_equal_to(
+                    min_value=0.0663319561737353,
+                    raise_warning=False,
+                    ignore_na=True,
+                ),
+                Check.less_than_or_equal_to(
+                    max_value=38012.07296637608,
+                    raise_warning=False,
+                    ignore_na=True,
+                ),
+            ],
+            nullable=False,
+            unique=False,
+            coerce=False,
+            required=True,
+            regex=False,
+            description=None,
+            title=None,
+        ),
+        "expenditure_essential_council_tax": Column(
+            dtype="float64",
+            checks=[
+                Check.greater_than_or_equal_to(
+                    min_value=0.0051039838246651,
+                    raise_warning=False,
+                    ignore_na=True,
+                ),
+                Check.less_than_or_equal_to(
+                    max_value=72381.7058025665,
+                    raise_warning=False,
+                    ignore_na=True,
+                ),
+            ],
+            nullable=False,
+            unique=False,
+            coerce=False,
+            required=True,
+            regex=False,
+            description=None,
+            title=None,
+        ),
+        "expenditure_essential_other": Column(
+            dtype="float64",
+            checks=[
+                Check.greater_than_or_equal_to(
+                    min_value=0.0576658451986077,
+                    raise_warning=False,
+                    ignore_na=True,
+                ),
+                Check.less_than_or_equal_to(
+                    max_value=131732.88357074803,
+                    raise_warning=False,
+                    ignore_na=True,
+                ),
+            ],
+            nullable=False,
+            unique=False,
+            coerce=False,
+            required=True,
+            regex=False,
+            description=None,
+            title=None,
+        ),
+        "expenditure_qol": Column(
+            dtype="float64",
+            checks=[
+                Check.greater_than_or_equal_to(
+                    min_value=0.0075664034809051,
+                    raise_warning=False,
+                    ignore_na=True,
+                ),
+                Check.less_than_or_equal_to(
+                    max_value=44047.978557257185,
+                    raise_warning=False,
+                    ignore_na=True,
+                ),
+            ],
+            nullable=False,
+            unique=False,
+            coerce=False,
+            required=True,
+            regex=False,
+            description=None,
+            title=None,
+        ),
+        "expenditure_discretionary_pension": Column(
+            dtype="float64",
+            checks=[
+                Check.greater_than_or_equal_to(
+                    min_value=7.434832053604623e-05,
+                    raise_warning=False,
+                    ignore_na=True,
+                ),
+                Check.less_than_or_equal_to(
+                    max_value=1751.9228055350657,
+                    raise_warning=False,
+                    ignore_na=True,
+                ),
+            ],
+            nullable=False,
+            unique=False,
+            coerce=False,
+            required=True,
+            regex=False,
+            description=None,
+            title=None,
+        ),
+        "expenditure_discretionary_other": Column(
+            dtype="float64",
+            checks=[
+                Check.greater_than_or_equal_to(
+                    min_value=6.498288127545492e-05,
+                    raise_warning=False,
+                    ignore_na=True,
+                ),
+                Check.less_than_or_equal_to(
+                    max_value=1106.6536006248723,
+                    raise_warning=False,
+                    ignore_na=True,
+                ),
+            ],
+            nullable=False,
+            unique=False,
+            coerce=False,
+            required=True,
+            regex=False,
+            description=None,
+            title=None,
+        ),
+        "expenditure_uncategorized": Column(
+            dtype="float64",
+            checks=[
+                Check.greater_than_or_equal_to(
+                    min_value=0.0112200089135285,
+                    raise_warning=False,
+                    ignore_na=True,
+                ),
+                Check.less_than_or_equal_to(
+                    max_value=27952.404085781254,
+                    raise_warning=False,
+                    ignore_na=True,
+                ),
+            ],
+            nullable=False,
+            unique=False,
+            coerce=False,
+            required=True,
+            regex=False,
+            description=None,
+            title=None,
+        ),
+        "expenditure": Column(
+            dtype="float64",
+            checks=[
+                Check.greater_than_or_equal_to(
+                    min_value=122.41904667293306,
+                    raise_warning=False,
+                    ignore_na=True,
+                ),
+                Check.less_than_or_equal_to(
+                    max_value=317967.3068890481,
+                    raise_warning=False,
+                    ignore_na=True,
+                ),
+            ],
+            nullable=False,
+            unique=False,
+            coerce=False,
+            required=True,
+            regex=False,
+            description=None,
+            title=None,
+        ),
+        "cash_min": Column(
+            dtype="float64",
+            checks=[
+                Check.greater_than_or_equal_to(
+                    min_value=-135219.78615374945,
+                    raise_warning=False,
+                    ignore_na=True,
+                ),
+                Check.less_than_or_equal_to(
+                    max_value=301555.3799012761,
+                    raise_warning=False,
+                    ignore_na=True,
+                ),
+            ],
+            nullable=False,
+            unique=False,
+            coerce=False,
+            required=True,
+            regex=False,
+            description=None,
+            title=None,
+        ),
+        "cash_max": Column(
+            dtype="float64",
+            checks=[
+                Check.greater_than_or_equal_to(
+                    min_value=-25118.210471745988,
+                    raise_warning=False,
+                    ignore_na=True,
+                ),
+                Check.less_than_or_equal_to(
+                    max_value=376291.5005088221,
+                    raise_warning=False,
+                    ignore_na=True,
+                ),
+            ],
+            nullable=False,
+            unique=False,
+            coerce=False,
+            required=True,
+            regex=False,
+            description=None,
+            title=None,
+        ),
+        "cash_balance_final": Column(
+            dtype="float64",
+            checks=[
+                Check.greater_than_or_equal_to(
+                    min_value=-92938.38572931816,
+                    raise_warning=False,
+                    ignore_na=True,
+                ),
+                Check.less_than_or_equal_to(
+                    max_value=306195.4414382706,
+                    raise_warning=False,
+                    ignore_na=True,
+                ),
+            ],
+            nullable=False,
+            unique=False,
+            coerce=False,
+            required=True,
+            regex=False,
+            description=None,
+            title=None,
+        ),
+        "end_of_this_period": Column(
+            dtype="datetime64[ns]",
+            checks=None,
             nullable=False,
             unique=False,
             coerce=False,
@@ -181,7 +620,7 @@ schema = DataFrameSchema(
                 min_value=0.0, raise_warning=False, ignore_na=True
             ),
             Check.less_than_or_equal_to(
-                max_value=99.0, raise_warning=False, ignore_na=True
+                max_value=49499.0, raise_warning=False, ignore_na=True
             ),
         ],
         nullable=False,

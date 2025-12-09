@@ -2,6 +2,7 @@ import polars as pl
 import re
 import json
 from pathlib import Path
+import argparse
 
 def infer_regex_from_values(values):
     values = [str(v) for v in values if v is not None]
@@ -9,7 +10,7 @@ def infer_regex_from_values(values):
         return ""
     if all(v.isdigit() for v in values):
         return r"^\d+$"
-    if all(v.isupper() for v in values):
+    if all(v.isalpha() and v.isupper() for v in values):
         return r"^[A-Z]+$"
     if all(v.isalnum() for v in values):
         return r"^\w+$"
@@ -31,7 +32,11 @@ def polars_dtype_to_metadata_type(dtype):
     return str(dtype)
 
 def main():
-    path = "test_data/2019-01-06.csv"
+    parser = argparse.ArgumentParser(description="Infer metadata from a CSV using Polars.")
+    parser.add_argument("csv_path", help="Path to the input CSV file")
+    args = parser.parse_args()
+
+    path = args.csv_path
     lf = pl.scan_csv(path)
 
     dtypes = lf.dtypes
@@ -54,7 +59,6 @@ def main():
         if dtype == pl.Date or dtype == pl.Datetime:
             date_cols.add(col)
         elif dtype == pl.Utf8 or dtype == pl.String:
-            # Try to parse as date
             sample = lf.select(pl.col(col)).collect()[col].drop_nulls().to_list()[:10]
             if all(re.match(r"\d{4}-\d{2}-\d{2}", str(val)) for val in sample if val is not None):
                 date_cols.add(col)
@@ -69,7 +73,6 @@ def main():
         date_minmax[col] = minmax
 
     for col, dtype in zip(columns, dtypes):
-        # If it's a date column, override type
         field_type = "date" if col in date_cols else polars_dtype_to_metadata_type(dtype)
         field = {
             "field_name": col,
@@ -77,7 +80,6 @@ def main():
             "description": "",
         }
         constraints = []
-        # Nulls
         constraints.append(f"nulls: {null_counts[col][0]}")
         if field_type == "date":
             min_val = date_minmax[col]["min"][0]
@@ -85,11 +87,16 @@ def main():
             constraints.append(f"min: {min_val}, max: {max_val}")
         elif field_type == "string":
             values = string_df[col].drop_nulls().unique().to_list()
-            regex = infer_regex_from_values(values)
+            ignore_set = {"N/A", "NA", ""}
+            regex_values = [v for v in values if v not in ignore_set]
+            regex = infer_regex_from_values(regex_values)
+            outliers = [v for v in values if v not in regex_values]
             if regex and regex != r"^.*$":
                 constraints.append(f"regex: [\"{regex}\"]")
-            # Unique values for categoricals
-            if len(values) <= 20:
+                if outliers:
+                    allowed = ', '.join([f'"{v}"' for v in outliers])
+                    constraints.append(f"allowed_values: [{allowed}]")
+            elif len(values) <= 20:
                 allowed = ', '.join([f'"{v}"' for v in values])
                 constraints.append(f"allowed_values: [{allowed}]")
         field["constraints"] = ", ".join(constraints)
@@ -103,9 +110,11 @@ def main():
         "fields": fields
     }
 
-    output_dir = Path("json")
+    # Output JSON only
+    output_dir = Path("data_dictionary_json")
     output_dir.mkdir(exist_ok=True)
-    output_path = output_dir / "polars_inference.json"
+    input_stem = Path(path).stem
+    output_path = output_dir / f"{input_stem}_data_dictionary.json"
     with open(output_path, "w") as f:
         json.dump(metadata, f, indent=2)
     print(f"Summary saved to {output_path}")

@@ -1,0 +1,80 @@
+{
+  "dataset": {
+    "name": "Mean expenditure per local authority 2019-2024",
+    "description": "the mean expenditure released from customer current accounts, aggregated to local authority level, for the years 2019 to 2024"
+  },
+  "fields": {
+    "year": {
+      "field_name": "year",
+      "type": "int",
+      "description": "year to which the means are aggregated",
+      "constraints": "nulls: 0"
+    },
+    "lad_sdf": {
+      "field_name": "lad_sdf",
+      "type": "string",
+      "description": "local authority code",
+      "constraints": "nulls: 0, regex: [\"^\\w+$\"]"
+    },
+    "mean_expenditure": {
+      "field_name": "mean_expenditure",
+      "type": "float",
+      "description": "mean total expenditure released from the customer current accounts of a local authority for the segmented year",
+      "constraints": "nulls: 0"
+    },
+    "mean_expenditure_committed_mortgage": {
+      "field_name": "mean_expenditure_committed_mortgage",
+      "type": "float",
+      "description": "mean expenditure categorised as regularly committed mortgage payment, released from a local authority for the segmented year",
+      "constraints": "nulls: 0"
+    },
+    "mean_expenditure_committed_rent": {
+      "field_name": "mean_expenditure_committed_rent",
+      "type": "float",
+      "description": "mean expenditure categorised as regularly committed rent payment, released from a local authority for the segmented year",
+      "constraints": "nulls: 0"
+    },
+    "mean_expenditure_committed_other": {
+      "field_name": "mean_expenditure_committed_other",
+      "type": "float",
+      "description": "mean expenditure categorised as regularly committed payments that are uncategorised, released from a local authority for the segmented year",
+      "constraints": "nulls: 0"
+    },
+    "mean_expenditure_essential_council_tax": {
+      "field_name": "mean_expenditure_essential_council_tax",
+      "type": "float",
+      "description": "mean expenditure categorised as essential council tax payments, released from a local authority for the segmented year",
+      "constraints": "nulls: 0"
+    },
+    "mean_expenditure_essential_other": {
+      "field_name": "mean_expenditure_essential_other",
+      "type": "float",
+      "description": "mean expenditure categorised as essential council that are uncategorised, released from a local authority for the segmented year",
+      "constraints": "nulls: 0"
+    },
+    "mean_expenditure_qol": {
+      "field_name": "mean_expenditure_qol",
+      "type": "float",
+      "description": "mean expenditure categorised as quality of life spend, this could be purchases for clothes or furnishing of a better standard, released from a local authority for the segmented year",
+      "constraints": "nulls: 0"
+    },
+    "mean_expenditure_discretionary_pension": {
+      "field_name": "mean_expenditure_discretionary_pension",
+      "type": "float",
+      "description": "mean expenditure categorised as payment to an opted-in-for pension scheme, released from a local authority for the segmented year",
+      "constraints": "nulls: 0"
+    },
+    "mean_expenditure_discretionary_other": {
+      "field_name": "mean_expenditure_discretionary_other",
+      "type": "float",
+      "description": "mean expenditure categorised as non-essential expenditure that is uncategorised, released from a local authority for the segmented year",
+      "constraints": "nulls: 0"
+    },
+    "mean_expenditure_uncategorized": {
+      "field_name": "mean_expenditure_uncategorized",
+      "type": "float",
+      "description": "mean expenditure categorised as uncategorised expenditure, this could be essential or non-essential - it is unknown, released from a local authority for the segmented year",
+      "constraints": "nulls: 0"
+    }
+  }
+}

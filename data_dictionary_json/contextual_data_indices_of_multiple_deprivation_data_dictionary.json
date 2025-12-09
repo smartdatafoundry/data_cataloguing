@@ -1,0 +1,56 @@
+{
+  "dataset": {
+    "name": "Contextual Data - Indices of Multiple Deprivation",
+    "description": "Contextual dataset containing indicators of geographic access to essential local services for ITL areas in Great Britain. The variables were collected from The Scottish Index of Multiple Deprivation (SIMD), The Welsh Index of Multiple Deprivation (WIMD) & The English Index of Deprivation (EID). Variables include public and private transport travel times to the nearest general practice, private transport travel times and road distances to the nearest primary school, and road distances to the nearest general practice."
+  },
+  "fields": {
+    "itl_code": {
+      "field_name": "itl_code",
+      "type": "string",
+      "description": "code for the ITL area",
+      "constraints": "nulls: 0, regex: [\"^\\w+$\"]"
+    },
+    "itl_area": {
+      "field_name": "itl_area",
+      "type": "string",
+      "description": "ITL area name",
+      "constraints": "nulls: 0"
+    },
+    "itl_level": {
+      "field_name": "itl_level",
+      "type": "string",
+      "description": "ITL level for the area, ITL1 for England & ITL2 for Wales & Scotland",
+      "constraints": "nulls: 0, regex: [\"^\\w+$\"]"
+    },
+    "gp_private_transport_time": {
+      "field_name": "gp_private_transport_time",
+      "type": "float",
+      "description": "Average private transport time to a GP surgery in minutes (SIMD & WIMD)",
+      "constraints": "nulls: 10"
+    },
+    "gp_public_transport_time": {
+      "field_name": "gp_public_transport_time",
+      "type": "float",
+      "description": "Average public transport travel time to a GP surgery in minutes (SIMD & WIMD)",
+      "constraints": "nulls: 10"
+    },
+    "primary_school_private_transport_time": {
+      "field_name": "primary_school_private_transport_time",
+      "type": "float",
+      "description": "Average time taken using private transport to travel to primary school in minutes (SIMD & WIMD)",
+      "constraints": "nulls: 10"
+    },
+    "road_distance_to_a_primary_school_indicator_km": {
+      "field_name": "road_distance_to_a_primary_school_indicator_km",
+      "type": "float",
+      "description": "Average road distance to a primary school (km) (EID)",
+      "constraints": "nulls: 11"
+    },
+    "road_distance_to_a_GP_surgery_indicator_km": {
+      "field_name": "road_distance_to_a_GP_surgery_indicator_km",
+      "type": "float",
+      "description": "Average road distance to a GP (km) (EID)",
+      "constraints": "nulls: 11"
+    }
+  }
+}

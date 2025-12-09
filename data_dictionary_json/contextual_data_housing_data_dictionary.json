@@ -1,0 +1,44 @@
+{
+  "dataset": {
+    "name": "Contextual Data - Housing",
+    "description": "Housing contextual dataset containing information on average house size, low energy performance & average house price for homes in ITL areas in GB."
+  },
+  "fields": {
+    "itl_code": {
+      "field_name": "itl_code",
+      "type": "string",
+      "description": "code for the ITL area",
+      "constraints": "nulls: 0, regex: [\"^\\w+$\"]"
+    },
+    "itl_area": {
+      "field_name": "itl_area",
+      "type": "string",
+      "description": "ITL area name",
+      "constraints": "nulls: 0"
+    },
+    "itl_level": {
+      "field_name": "itl_level",
+      "type": "string",
+      "description": "ITL level for the area, ITL1 for England & ITL2 for Wales & Scotland",
+      "constraints": "nulls: 0, regex: [\"^\\w+$\"]"
+    },
+    "average_home_size_m2": {
+      "field_name": "average_home_size_m2",
+      "type": "float",
+      "description": "The mean of the total floor area of all properties listed in the area. The data comes from energy performance certificate surveys for individual dwellings (Gov.uk, 2024 for England & Wales and Scottish Government, 2024 for Scotland). We consider energy certificates from Q4 2014 to Q3 2024.",
+      "constraints": "nulls: 0"
+    },
+    "homes_with_poor_energy_efficiency_perc": {
+      "field_name": "homes_with_poor_energy_efficiency_perc",
+      "type": "float",
+      "description": "Percentage of homes in the area with an energy efficiency rating of less than C. For England & Wales the data comes from a 2024 ONS dataset showing the number of Energy Performance Certificates (EPCs) in each energy efficiency rating band for a 10-year period up to the financial year end 2024. EPC ratings go from A to G – with A as the best - We calculate the proportion of houses with an energy rating worse than C listed in each area. For Scotland the data is taken from energy performance certificate surveys for individual dwellings from the Scottish Government in 2024. We consider energy certificates from Q4 2014 to Q3 2024. This dataset shows the Energy Performance Certificate (EPC) rating for each dwelling. EPC ratings go from A to G – with A as the best - For each area, we calculate the proportion of houses with an energy rating worse than C listed in that area.",
+      "constraints": "nulls: 0"
+    },
+    "average_house_price_gbp": {
+      "field_name": "average_house_price_gbp",
+      "type": "float",
+      "description": "The median price paid for residential property in England and Wales coming from 2023 ONS data, for the year ending March 2023. In additon to the mean of all market value sales in Scotland in each area registered in 2023, coming from the 2023 Registers of Scotland dataset.",
+      "constraints": "nulls: 0"
+    }
+  }
+}

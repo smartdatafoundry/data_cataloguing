@@ -1,0 +1,50 @@
+{
+  "dataset": {
+    "name": "Contextual Data - Demographic",
+    "description": "Collective demographic contextual dataset containing information on young mothers, families with dependent children, disabled/long-term health and youth population percentages for ITL areas in GB."
+  },
+  "fields": {
+    "itl_code": {
+      "field_name": "itl_code",
+      "type": "string",
+      "description": "code for the ITL area",
+      "constraints": "nulls: 0, regex: [\"^\\w+$\"]"
+    },
+    "itl_area": {
+      "field_name": "itl_area",
+      "type": "string",
+      "description": "ITL area name",
+      "constraints": "nulls: 0"
+    },
+    "itl_level": {
+      "field_name": "itl_level",
+      "type": "string",
+      "description": "ITL level for the area, ITL1 for England & ITL2 for Wales & Scotland",
+      "constraints": "nulls: 0, regex: [\"^\\w+$\"]"
+    },
+    "young_mothers_perc": {
+      "field_name": "young_mothers_perc",
+      "type": "float",
+      "description": "Proportion of births to mothers aged under 18, as a proportion of total births for England & Wales - The latest data is for 2024 and is supplied by the ONS for England & Wales, in addititon to mothers aged under 19 for Scotland as a proportion of first-time mothers - The latest data is for the period 2016/17-2018/19 and is supplied by Public Health Scotland.",
+      "constraints": "nulls: 0"
+    },
+    "families_with_dependent_children_perc": {
+      "field_name": "families_with_dependent_children_perc",
+      "type": "float",
+      "description": "Proportion of households containing families with dependent children, data for England and Wales comes from item TS003 in the 2021 Census, whereas data for Scotland comes from item UC113 in the 2022 Census.",
+      "constraints": "nulls: 0"
+    },
+    "disabled_longterm_health_household_perc": {
+      "field_name": "disabled_longterm_health_household_perc",
+      "type": "float",
+      "description": "Proportion of individuals who have a disability or long-term health issue, which significantly impacts daily activities. Data for England and Wales comes from item TS038 in the 2021 Census, whereas data for Scotland comes from item UV303 in the 2022 Census.",
+      "constraints": "nulls: 0"
+    },
+    "youth_population_perc": {
+      "field_name": "youth_population_perc",
+      "type": "float",
+      "description": "Proportion of people under the age of 16 for England, Wales & Scotland. Data for England and Wales comes from item TS007B in the 2021 Census, it shows age by broad age bands - We calculate the proportion of people under the age of 16 in each area. Whereas data for Scotland comes from the Scottish Government and presents population estimates for people who are under 16 years old - We calculate the proportion of people under 16 in each region for the year 2020.",
+      "constraints": "nulls: 0"
+    }
+  }
+}

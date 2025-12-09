@@ -1,0 +1,56 @@
+{
+  "dataset": {
+    "name": "Contextual Data - Education",
+    "description": "Education contextual dataset containing information on school & qualification attainment percentages for ITL areas in GB."
+  },
+  "fields": {
+    "itl_code": {
+      "field_name": "itl_code",
+      "type": "string",
+      "description": "code for the ITL area",
+      "constraints": "nulls: 0, regex: [\"^\\w+$\"]"
+    },
+    "itl_area": {
+      "field_name": "itl_area",
+      "type": "string",
+      "description": "ITL area name",
+      "constraints": "nulls: 0"
+    },
+    "itl_level": {
+      "field_name": "itl_level",
+      "type": "string",
+      "description": "ITL level for the area, ITL1 for England & ITL2 for Wales & Scotland",
+      "constraints": "nulls: 0, regex: [\"^\\w+$\"]"
+    },
+    "basic_secondary": {
+      "field_name": "basic_secondary",
+      "type": "float",
+      "description": "The proportion of people in each area whose highest level of qualification is level 1 or level 2 (In England & Wales). In addition to the proportion of people in each area whose highest level of qualification is lower school qualifications (in Scotland). For England & Wales the data from item TS067 in the 2021 Census, which shows the highest level of qualification achieved by all people over the age of 16. For Scotland the data comes from item UV501 in the 2022 Census, which shows the highest level of qualification achieved by all people over the age of 16.",
+      "constraints": "nulls: 0"
+    },
+    "advanced_secondary": {
+      "field_name": "advanced_secondary",
+      "type": "float",
+      "description": "The proportion of people in each area whose highest level of qualification is level 3 (For England & Wales). In addition to the proportion of people in each area whose highest level of qualification is upper school (for Scotland). For England & Wales the data from item TS067 in the 2021 Census, which shows the highest level of qualification achieved by all people over the age of 16. For Scotland the data comes from item UV501 in the 2022 Census, which shows the highest level of qualification achieved by all people over the age of 16.",
+      "constraints": "nulls: 0"
+    },
+    "apprenticeship": {
+      "field_name": "apprenticeship",
+      "type": "float",
+      "description": "The proportion of people in each area whose highest level of qualification is apprenticeship. For England & Wales the data from item TS067 in the 2021 Census, which shows the highest level of qualification achieved by all people over the age of 16. For Scotland the data comes from item UV501 in the 2022 Census, which shows the highest level of qualification achieved by all people over the age of 16.",
+      "constraints": "nulls: 0"
+    },
+    "further_education": {
+      "field_name": "further_education",
+      "type": "float",
+      "description": "The proportion of people in each area who have achieved level 4 qualifications (In England & Wales). In addition to the proportion of people in each area who have achieved further education, sub degree qualifications, degree level qualifications or above (In Scotland). For England & Wales the data from item TS067 in the 2021 Census, which shows the highest level of qualification achieved by all people over the age of 16. For Scotland the data comes from item UV501 in the 2022 Census, which shows the highest level of qualification achieved by all people over the age of 16.",
+      "constraints": "nulls: 0"
+    },
+    "no_qualification": {
+      "field_name": "no_qualification",
+      "type": "float",
+      "description": "The proportion of people in each area who have not received any of the aforementioned qualifications. For England & Wales the data from item TS067 in the 2021 Census, which shows the highest level of qualification achieved by all people over the age of 16. For Scotland the data comes from item UV501 in the 2022 Census, which shows the highest level of qualification achieved by all people over the age of 16.",
+      "constraints": "nulls: 0"
+    }
+  }
+}

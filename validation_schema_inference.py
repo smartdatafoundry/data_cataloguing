@@ -15,7 +15,7 @@ def retrieve_data(path: Path) -> pd.DataFrame:
 
 def main() -> None:
     dataset_path = Path().absolute()
-    data = retrieve_data(dataset_path / "mock_data/weekly_financials.csv")
+    data = retrieve_data(dataset_path / "test_data/2019-01-06.csv")
     data_inferred_schema = pa.infer_schema(data)
     with open('inferred_schema.py', 'w') as file:
         file.write(data_inferred_schema.to_script())
